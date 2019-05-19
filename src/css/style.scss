@@ -1,4 +1,4 @@
-body { margin: 0; }
+body { margin: 0; font-family: 'Montserrat', sans-serif;}
 
 @font-face {
     font-family: 'KGNoRegretsSketch';
@@ -15,7 +15,7 @@ canvas { background-color: rgba(255,255,255,0.1) }
 
 $hh: 50px;
 header {
-    height: $hh;
+    height: $hh; visibility: hidden;
 }
 
 #main {
@@ -31,6 +31,30 @@ header {
         }
     }
     .configurator {
-        background-color: blue; max-width: 400px; flex: 1;
+        background-color: white; max-width: 400px; flex: 1; box-shadow: -2px -2px 4px 0 rgba(35,69,152,.1); display: flex; flex-direction: column;
+        .heading {
+            background: #4c596a; color: #fff; padding: 20px;
+            span { font-weight: bold; font-size: 14px; display: block;}
+            small {  color: #bcd5da; }
+        }
+
+        .panel {
+            .panel-heading {
+                color: #4c596a; padding: 15px; border-bottom: solid 1px #f1f1f1;
+            }
+            .panel-content {
+                background-color: #f4f7fc; padding: 10px 15px;
+                .custom-label {
+                    display: flex; margin-bottom: 10px; border: solid 1px rgba(35, 69, 152, 0.15); background: #fff;
+                    label { color: #3b5b84; flex: 1; max-width: 25%; padding: 0 10px; font-weight: 700; font-size: 12px; display: flex; align-items: center;}
+                    textarea { flex: 1; border: none; border-left: solid 1px rgba(35, 69, 152, 0.15); font-size: 12px; background: #e2e8f1; }
+                }
+            }
+        }
+
+        .save {
+            margin-top: auto; background-color: #3ab0e0; padding: 40px 20px;
+            .btn-download { color:#fff; font-weight: 700; cursor: pointer; padding: 10px;}
+        }
     }
 }
