@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'KGNoRegretsSketch';
+    src: url('fonts/KGNoRegretsSketch.eot');
+    src: url('fonts/KGNoRegretsSketch.eot') format('embedded-opentype'),
+         url('fonts/KGNoRegretsSketch.woff2') format('woff2'),
+         url('fonts/KGNoRegretsSketch.woff') format('woff'),
+         url('fonts/KGNoRegretsSketch.ttf') format('truetype'),
+         url('fonts/KGNoRegretsSketch.svg#KGNoRegretsSketch') format('svg');
+}

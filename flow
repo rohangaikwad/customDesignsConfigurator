@@ -1,0 +1,16 @@
+designs
+    - id
+    - name
+    - image path
+    - dimensions
+    - config
+
+config
+{
+    fontFamily: 'roboto',
+    labels: [
+        {
+            id: "Name", x: 10, y: 10, color: red, fontsize: 16, fontFamily: 'roboto',
+        }
+    ]
+}

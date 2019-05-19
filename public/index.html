@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Custom Designs Configurator</title>
+    <link rel="stylesheet" href="css/KGNoRegretsSketch.css">
+    <link rel="stylesheet" href="css/style.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo"></div>
+        <ul class="menu">
+            <li class="new">
+                <a href="new">Create New</a>
+            </li>
+            <li class="saved">
+                <a href="saved">Saved Designs</a>
+                <div class="saved-notification">
+                    <div>Your design has been saved and can be accessed from this link.</div><button>Ok</button>
+                </div>
+            </li>
+        </ul>
+    </header>
+
+    <section id="main">
+        <div class="canvasContainer">
+            <div class="canvas-wrapper">
+                <canvas id="c" width="600" height="600"></canvas>
+            </div>
+        </div>
+        <sidebar class="configurator">
+            <section class="heading">
+                <span>Customize your design</span>
+                <small>Change labels and appearance</small>
+            </section>
+            <section class="options">
+                <div class="panel panel-labels">
+                    <div class="panel-heading">Change labels</div>
+                    <div class="panel-content"></div>
+                </div>
+            </section>
+            <section class="save">
+                <div class="btn-save">
+                    <i class="fas"></i> Save
+                </div>
+                <div class="btn-download">
+                    <i class="fas"></i> Download
+                </div>
+            </section>
+        </sidebar>
+    </section>
+
+    <img id="i1" style="display: none;" />
+    <img id="i2" style="display: none;" />
+    <canvas id="t" style="display: none;"></canvas>
+
+    <script src="js/common.min.js"></script>
+</body>
+</html>
