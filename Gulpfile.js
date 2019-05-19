@@ -14,6 +14,7 @@ gulp.task('common-bundle-js', (done) => {
         'src/js/libs/jquery-3.4.1.min.js',
         'src/js/libs/fabric-2.4.6.min.js',
         'src/js/libs/canvas2image.js',
+        'src/js/libs/pickr.es5.min.js',
         'src/js/main.js'
     ];
 

@@ -48,15 +48,15 @@ var canvasElem = document.querySelector('#c');
 
 var wh = window.innerHeight - 50 - 100;
 var scaledH = options.height * 1, scaledW = options.width * 1;
-if(options.height > wh) {
+if (options.height > wh) {
     scaledH = wh * 1;
-    scaledW = wh/options.height * options.width
+    scaledW = wh / options.height * options.width
 }
 
 canvasElem.width = options.width;
 canvasElem.height = options.height;
 
-var canvas = new fabric.Canvas('c', {preserveObjectStacking: true});
+var canvas = new fabric.Canvas('c', { preserveObjectStacking: true });
 
 
 fabric.Object.prototype.set({
@@ -74,10 +74,10 @@ function init(img) {
 
     canvas.add(img);
 
-    options.labels.forEach(function(o,i){
+    options.labels.forEach(function (o, i) {
         console.log(o.value)
-        var text = new fabric.Text(o.value, { 
-            left: options.width * o.x, top: options.height * o.y, fontSize: o.fontsize, fontFamily: 'KGNoRegretsSketch', fill: o.color, originX: o.originX || 'center', originY: 'center', fontWeight: o.fontWeight || 'normal', id: 'f'+i
+        var text = new fabric.Text(o.value, {
+            left: options.width * o.x, top: options.height * o.y, fontSize: o.fontsize, fontFamily: 'KGNoRegretsSketch', fill: o.color, originX: o.originX || 'center', originY: 'center', fontWeight: o.fontWeight || 'normal', id: 'f' + i
         });
         canvas.add(text);
     });
@@ -87,7 +87,7 @@ function out() {
     var jpgURLat50PercentQuality = canvas.toDataURL("image/jpeg", 0.6);
     var i1 = document.querySelector('#i1');
     i1.src = jpgURLat50PercentQuality;
-    i1.onload = function() {
+    i1.onload = function () {
         thumb();
     }
 }
@@ -96,20 +96,20 @@ function thumb() {
     var wSize = 700;
     var tCanvas = document.querySelector('#t');
     tCanvas.width = wSize;
-    tCanvas.height = (wSize * options.height)/options.width;
+    tCanvas.height = (wSize * options.height) / options.width;
 
     // tCanvas.width = options.width;
     // tCanvas.height = options.height;
 
     var ctx = tCanvas.getContext("2d");
     var img = document.querySelector('#i1');
-    ctx.drawImage(img, 0, 0, wSize, (wSize * options.height)/options.width);
+    ctx.drawImage(img, 0, 0, wSize, (wSize * options.height) / options.width);
     //ctx.drawImage(img, 0, 0, options.width, options.height);
-    
+
     var thumb = tCanvas.toDataURL("image/jpeg", 0.4);
     var i2 = document.querySelector('#i2')
     i2.src = thumb;
-    i2.onload = function() {
+    i2.onload = function () {
         //i2.style.display = "block";
         Canvas2Image.saveAsPNG(tCanvas);
     }
@@ -121,7 +121,7 @@ function thumb() {
 // populate labels
 {
     var labelsContent = document.querySelector('.panel.panel-labels .panel-content');
-    options.labels.forEach(function(o,i) {
+    options.labels.forEach(function (o, i) {
 
         var div = document.createElement('div');
         div.className = "custom-label";
@@ -131,27 +131,106 @@ function thumb() {
 
         var tBox = document.createElement('textarea');
         tBox.value = o.value;
-        tBox.addEventListener('keyup', function(e) {
+        tBox.addEventListener('keyup', function (e) {
             console.log(e.target.value)
-            canvas.getObjects().forEach(function(o) {
-                if(o.id === 'f'+i) {
+            canvas.getObjects().forEach(function (o) {
+                if (o.id === 'f' + i) {
                     canvas.setActiveObject(o);
                     var obj = canvas.getActiveObject();
                     obj.set({
-                        text:e.target.value
+                        text: e.target.value
                     });
                     canvas.renderAll();
                 }
             })
         });
-        
+
+        var colorDiv = document.createElement('div');
+        colorDiv.className = "color-picker pickr" + i;
+
+
         div.appendChild(label);
         div.appendChild(tBox);
+        div.appendChild(colorDiv);
         labelsContent.appendChild(div);
+
+
+        initPicker(colorDiv, i, o.color)
     })
+
 }
 
 
 document.querySelector('.btn-download').addEventListener('click', function () {
     out();
 });
+
+
+
+function initPicker(elem, i, color) {
+
+    var pickr = Pickr.create({
+        el: '.pickr' + i,
+        default: color,
+        comparison: false,
+        strings: {
+            save: 'Apply',  // Default for save button
+            clear: 'Clear' // Default for clear button
+        },
+
+        components: {
+
+            // Main components
+            preview: true,
+            opacity: false,
+            hue: true,
+
+            // Input / output Options
+            interaction: {
+                hex: false,
+                rgba: false,
+                hsla: false,
+                hsva: false,
+                cmyk: false,
+                input: false,
+                clear: false,
+                save: false
+            }
+        },
+        // onSave(hsva, instance) {
+        //     var hexColor = hsva.toHEX().toString();
+        //     console.log(hexColor)
+
+
+        //     
+        // }
+    }).on('save', function (args) {
+        var hexColor = args.toHEXA().toString();
+        console.log('save', hexColor);
+
+        canvas.getObjects().forEach(function (o) {
+            if (o.id === 'f' + i) {
+                canvas.setActiveObject(o);
+                var obj = canvas.getActiveObject();
+                obj.set({
+                    fill: hexColor
+                });
+                canvas.renderAll();
+            }
+        })
+    }).on('change', function (args) {
+        var hexColor = args.toHEXA().toString();
+        console.log('save', hexColor);
+
+        canvas.getObjects().forEach(function (o) {
+            if (o.id === 'f' + i) {
+                canvas.setActiveObject(o);
+                var obj = canvas.getActiveObject();
+                obj.set({
+                    fill: hexColor
+                });
+                canvas.renderAll();
+            }
+        })
+    })
+}

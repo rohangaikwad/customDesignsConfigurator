@@ -40,6 +40,12 @@ header { height: 50px; visibility: hidden; }
 
 #main .configurator .panel .panel-content .custom-label textarea { flex: 1; border: none; border-left: solid 1px rgba(35, 69, 152, 0.15); font-size: 12px; background: #e2e8f1; }
 
+#main .configurator .panel .panel-content .custom-label .color-picker { width: 60px; }
+
+#main .configurator .panel .panel-content .custom-label .pickr .pcr-button { height: 100%; width: 35px; }
+
 #main .configurator .save { margin-top: auto; background-color: #3ab0e0; padding: 40px 20px; }
 
 #main .configurator .save .btn-download { color: #fff; font-weight: 700; cursor: pointer; padding: 10px; }
+
+.pcr-app .pcr-selection .pcr-color-palette { height: 18em; }
