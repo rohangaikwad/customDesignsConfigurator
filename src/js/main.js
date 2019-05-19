@@ -77,7 +77,7 @@ function init(img) {
     options.labels.forEach(function (o, i) {
         console.log(o.value)
         var text = new fabric.Text(o.value, {
-            left: options.width * o.x, top: options.height * o.y, fontSize: o.fontsize, fontFamily: 'KGNoRegretsSketch', fill: o.color, originX: o.originX || 'center', originY: 'center', fontWeight: o.fontWeight || 'normal', id: 'f' + i
+            left: options.width * o.x, top: options.height * o.y, fontSize: o.fontsize, fontFamily: 'KGNoRegretsSketch', fill: o.color, originX: o.originX || 'center', originY: 'center', fontWeight: o.fontWeight || 'normal', id: 'f' + i, selectable: false
         });
         canvas.add(text);
     });
@@ -140,6 +140,7 @@ function thumb() {
                     obj.set({
                         text: e.target.value
                     });
+                    canvas.discardActiveObject();
                     canvas.renderAll();
                 }
             })
@@ -215,6 +216,7 @@ function initPicker(elem, i, color) {
                 obj.set({
                     fill: hexColor
                 });
+                canvas.discardActiveObject();
                 canvas.renderAll();
             }
         })
@@ -229,6 +231,7 @@ function initPicker(elem, i, color) {
                 obj.set({
                     fill: hexColor
                 });
+                canvas.discardActiveObject();
                 canvas.renderAll();
             }
         })
