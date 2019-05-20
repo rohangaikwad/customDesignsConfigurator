@@ -118,7 +118,7 @@ function thumb() {
             data: { img: thumb },
             success: function(data) {
                 if(data.status){
-                    console.log(data.name)
+                    $("#saved").addClass("loaded");
                     var viewLink = window.location.origin + "/api/design/view/" + data.name;
                     var downLink = window.location.origin + "/api/design/download/" + data.name;
                     $("#saved img").attr("src", viewLink);
@@ -135,6 +135,7 @@ function thumb() {
 
 $("#saved .close").click(function(){
     $("#saved").fadeOut(function(){
+        $("#saved").removeClass("loaded");
         $("#saved img").attr("src", '');
         $("#saved a").attr("href", '').text('');
     });
