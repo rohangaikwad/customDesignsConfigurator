@@ -83,12 +83,14 @@ function init(img) {
 }
 
 function out() {
-    var jpgURLat50PercentQuality = canvas.toDataURL("image/jpeg", 0.6);
-    var i1 = document.querySelector('#i1');
-    i1.src = jpgURLat50PercentQuality;
-    i1.onload = function () {
-        thumb();
-    }
+    $("#saved").fadeIn(function(){
+        var jpgURLat50PercentQuality = canvas.toDataURL("image/jpeg", 0.6);
+        var i1 = document.querySelector('#i1');
+        i1.src = jpgURLat50PercentQuality;
+        i1.onload = function () {
+            thumb();
+        }
+    });
 }
 
 function thumb() {
@@ -111,7 +113,6 @@ function thumb() {
     i2.onload = function () {
         //i2.style.display = "block";
         //Canvas2Image.saveAsPNG(tCanvas);
-
         $.post({
             url: 'api/design/save',
             data: { img: thumb },
@@ -122,7 +123,7 @@ function thumb() {
                     var downLink = window.location.origin + "/api/design/download/" + data.name;
                     $("#saved img").attr("src", viewLink);
                     $("#saved a").attr("href", downLink).text(downLink);
-                    $("#saved").fadeIn();
+                    
                 };
             },
             error: function(data) {
@@ -133,7 +134,10 @@ function thumb() {
 }
 
 $("#saved .close").click(function(){
-    $("#saved").fadeOut();
+    $("#saved").fadeOut(function(){
+        $("#saved img").attr("src", '');
+        $("#saved a").attr("href", '').text('');
+    });
 })
 
 
