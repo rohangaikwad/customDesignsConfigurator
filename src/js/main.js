@@ -75,7 +75,6 @@ function init(img) {
     canvas.add(img);
 
     options.labels.forEach(function (o, i) {
-        console.log(o.value)
         var text = new fabric.Text(o.value, {
             left: options.width * o.x, top: options.height * o.y, fontSize: o.fontsize, fontFamily: 'KGNoRegretsSketch', fill: o.color, originX: o.originX || 'center', originY: 'center', fontWeight: o.fontWeight || 'normal', id: 'f' + i, selectable: false
         });
@@ -93,7 +92,7 @@ function out() {
 }
 
 function thumb() {
-    var wSize = 700;
+    var wSize = options.width;//700;
     var tCanvas = document.querySelector('#t');
     tCanvas.width = wSize;
     tCanvas.height = (wSize * options.height) / options.width;
@@ -111,10 +110,31 @@ function thumb() {
     i2.src = thumb;
     i2.onload = function () {
         //i2.style.display = "block";
-        Canvas2Image.saveAsPNG(tCanvas);
+        //Canvas2Image.saveAsPNG(tCanvas);
+
+        $.post({
+            url: 'http://localhost:3000/api/design/save',
+            data: { img: thumb },
+            success: function(data) {
+                if(data.status){
+                    console.log(data.name)
+                    var viewLink = window.location.origin + "/api/design/view/" + data.name;
+                    var downLink = window.location.origin + "/api/design/download/" + data.name;
+                    $("#saved img").attr("src", viewLink);
+                    $("#saved a").attr("href", downLink).text(downLink);
+                    $("#saved").fadeIn();
+                };
+            },
+            error: function(data) {
+                console.log('error',data);
+            }
+        })
     }
 }
 
+$("#saved .close").click(function(){
+    $("#saved").fadeOut();
+})
 
 
 
@@ -132,7 +152,6 @@ function thumb() {
         var tBox = document.createElement('textarea');
         tBox.value = o.value;
         tBox.addEventListener('keyup', function (e) {
-            console.log(e.target.value)
             canvas.getObjects().forEach(function (o) {
                 if (o.id === 'f' + i) {
                     canvas.setActiveObject(o);
@@ -207,7 +226,6 @@ function initPicker(elem, i, color) {
         // }
     }).on('save', function (args) {
         var hexColor = args.toHEXA().toString();
-        console.log('save', hexColor);
 
         canvas.getObjects().forEach(function (o) {
             if (o.id === 'f' + i) {
@@ -222,7 +240,6 @@ function initPicker(elem, i, color) {
         })
     }).on('change', function (args) {
         var hexColor = args.toHEXA().toString();
-        console.log('save', hexColor);
 
         canvas.getObjects().forEach(function (o) {
             if (o.id === 'f' + i) {
