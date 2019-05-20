@@ -113,7 +113,7 @@ function thumb() {
         //Canvas2Image.saveAsPNG(tCanvas);
 
         $.post({
-            url: 'http://localhost:3000/api/design/save',
+            url: 'api/design/save',
             data: { img: thumb },
             success: function(data) {
                 if(data.status){
