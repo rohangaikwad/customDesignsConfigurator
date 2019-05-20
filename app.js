@@ -1,7 +1,7 @@
-// const fs = require('fs');
-// if (!fs.existsSync('designs')){
-//     fs.mkdirSync('designs');
-// }
+const fs = require('fs');
+if (!fs.existsSync('designs')){
+    fs.mkdirSync('designs');
+}
 
 var express = require('express');
 var path = require('path');

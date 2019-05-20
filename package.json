@@ -7,6 +7,7 @@
         "nodemon": "nodemon ./bin/www"
     },
     "dependencies": {
+        "body-parser": "^1.19.0",
         "cookie-parser": "~1.4.3",
         "debug": "~2.6.9",
         "express": "~4.16.0",
@@ -15,7 +16,6 @@
     },
     "devDependencies": {
         "autoprefixer": "^9.5.1",
-        "body-parser": "^1.19.0",
         "gulp-concat": "^2.6.1",
         "gulp-concat-css": "^3.1.0",
         "gulp-postcss": "^8.0.0",
